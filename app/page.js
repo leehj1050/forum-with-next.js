@@ -1,11 +1,9 @@
-import { connectDB } from "@/util/database";
+import Link from "next/link";
 
 export default async function Home() {
-  //DB
-  const db = (await connectDB).db("forum");
-  const result = await db.collection("post").find().toArray();
-
-  console.log(result);
-
-  return <div>홈입니다</div>;
+  return (
+    <>
+      <h1>home</h1>
+    </>
+  );
 }
