@@ -2,6 +2,30 @@
 import Link from "next/link";
 
 export default function ListItem({ result }) {
+  // 삭제버튼 클릭시~!!!
+  const handleDelClick = (e, selectId) => {
+    if (confirm("삭제하시겠습니까?")) {
+      fetch("/api/post/delete", {
+        method: "POST",
+        body: selectId,
+      })
+        .then((r) => {
+          return r.json();
+        })
+        .then((r) => {
+          alert(r);
+        })
+        .then(() => {
+          e.target.parentElement.style.opacity = 0;
+          setTimeout(() => {
+            e.target.parentElement.style.display = "none";
+          }, 1000);
+        });
+      // fetch(`/api/test?id=${selectId}`);
+      // fetch(`/api/abcd/${selectId}`);
+    } else alert("취소되었습니다.");
+  };
+
   return (
     <div className="list-bg">
       {result.map((item, idx) => {
@@ -14,24 +38,7 @@ export default function ListItem({ result }) {
             <span
               //삭제 로직
               onClick={(e) => {
-                fetch("/api/post/delete", {
-                  method: "POST",
-                  body: result[idx]._id,
-                })
-                  .then((r) => {
-                    return r.json();
-                  })
-                  .then((r) => {
-                    console.log(r);
-                  })
-                  .then(() => {
-                    e.target.parentElement.style.opacity = 0;
-                    setTimeout(() => {
-                      e.target.parentElement.style.display = "none";
-                    }, 1000);
-                  });
-                // fetch(`/api/test?id=${result[idx]._id}`);
-                // fetch(`/api/abcd/${result[idx]._id}`);
+                handleDelClick(e, result[idx]._id);
               }}
             >
               🗑️

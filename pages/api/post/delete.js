@@ -11,5 +11,5 @@ export default async function DeleteApi(req, res) {
 
     console.log("delete >>> ", req.body);
   }
-  return res.status(200).json("삭제완료~!!");
+  return res.status(200).json("삭제가 완료되었습니다.");
 }
