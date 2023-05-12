@@ -13,13 +13,15 @@ export default function ListItem({ result }) {
           return r.json();
         })
         .then((r) => {
-          alert(r);
-        })
-        .then(() => {
-          e.target.parentElement.style.opacity = 0;
-          setTimeout(() => {
-            e.target.parentElement.style.display = "none";
-          }, 1000);
+          if (r === "삭제가 완료되었습니다.") {
+            alert(r)
+            e.target.parentElement.style.opacity = 0;
+            setTimeout(() => {
+              e.target.parentElement.style.display = "none";
+            }, 1000);
+          } else {
+            alert(r);
+          }
         });
       // fetch(`/api/test?id=${selectId}`);
       // fetch(`/api/abcd/${selectId}`);
@@ -36,6 +38,7 @@ export default function ListItem({ result }) {
             </Link>
             <Link href={`/edit/${result[idx]._id}`}> ✏️ </Link>
             <span
+              className="del_btn"
               //삭제 로직
               onClick={(e) => {
                 handleDelClick(e, result[idx]._id);

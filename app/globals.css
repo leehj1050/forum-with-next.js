@@ -61,3 +61,13 @@ a {
   opacity: 1;
   transition: all 1s;
 }
+
+/* ListItem Component*/
+.del_btn {
+  cursor: pointer;
+}
+
+.userImage {
+  width: 1em;
+  height: 1em;
+}
