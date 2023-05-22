@@ -32,7 +32,11 @@ export default async function RootLayout({ children }) {
               {session.user.name} <LogoutBtn />
             </span>
           ) : (
-            <LoginBtn />
+            <>
+              <LoginBtn />
+              &nbsp;&nbsp;
+              <Link href="/register">회원가입</Link>
+            </>
           )}
         </div>
         {children}

@@ -10,7 +10,11 @@ export default async function Home() {
       {session ? (
         <h1>
           반갑습니다.&nbsp;
-          <img src={`${session.user.image}`} className="userImage" />
+          {session.user.image ? (
+            <img src={`${session.user.image}`} className="userImage" />
+          ) : (
+            <></>
+          )}
           &nbsp;{session.user.name}님!
         </h1>
       ) : (

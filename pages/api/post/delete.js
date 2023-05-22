@@ -17,8 +17,15 @@ export default async function DeleteApi(req, res) {
 
     //로그인이 되어있으면
     if (session) {
+      const adminEmail = await db
+        .collection("user_cred")
+        .findOne({ email: session.user.email });
+
       // 로그인한 유저가 같은지 확인후 본인글만 삭제가능하게 로직
-      if (findDoc.author === session.user.email) {
+      if (
+        findDoc.author === session.user.email ||
+        adminEmail.role === "admin"
+      ) {
         //deleteOne
         await db.collection("post").deleteOne({ _id: new ObjectId(req.body) });
       } else {
