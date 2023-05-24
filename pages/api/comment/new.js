@@ -5,6 +5,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function CommentNew(req, res) {
   let session = await getServerSession(req, res, authOptions);
+
   if (req.method === "POST") {
     req.body = JSON.parse(req.body);
     if (req.body.comment === "") {
@@ -24,6 +25,12 @@ export default async function CommentNew(req, res) {
       }
     }
   }
+  //댓글전송후.. 저장완료시..
+  const db = (await connectDB).db("forum");
+  const result = await db
+    .collection("comment")
+    .find({ parent: new ObjectId(req.body._id) })
+    .toArray();
 
-  res.status(200).json("저장완료");
+  res.status(200).json(result);
 }

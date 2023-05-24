@@ -14,7 +14,7 @@ export default function ListItem({ result }) {
         })
         .then((r) => {
           if (r === "삭제가 완료되었습니다.") {
-            alert(r)
+            alert(r);
             e.target.parentElement.style.opacity = 0;
             setTimeout(() => {
               e.target.parentElement.style.display = "none";
@@ -46,7 +46,8 @@ export default function ListItem({ result }) {
             >
               🗑️
             </span>
-            <p>1월 1일</p>
+            <p>작성자 ID : {result[idx].author}</p>
+            <p>작성자 닉네임 : {result[idx].name}</p>
           </div>
         );
       })}

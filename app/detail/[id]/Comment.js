@@ -7,25 +7,31 @@ export default function Comment({ _id }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/comment/commentList", { method: "GET" }).then((res) =>
-      res.json().then((data) => setData(data))
+    fetch(`/api/comment/commentList?id=${_id}`).then((res) =>
+      res.json().then((result) => setData(result))
     );
   }, []);
 
-  const resultComment = data.map((i) =>
-    i.parent === _id ? (
-      <div key={i._id}>{i.content}</div>
-    ) : (
-      <div key={i._id}></div>
-    )
-  );
-
-  console.log(resultComment);
-
   return (
-    <div>
-      {resultComment}
+    <div style={{ borderTop: "1px solid black", marginTop: "2.5em" }}>
+      <div style={{ fontSize: "1.5em", marginTop: "0.5em" }}>댓글</div>
+      {data.length > 0 ? (
+        data.map((i) => {
+          return (
+            <div
+              style={{ marginBottom: "1.5em", borderBottom: "1px solid black" }}
+              key={i._id}
+            >
+              <p>작성자 ID : {i.author}</p>
+              <p>{i.content}</p>
+            </div>
+          );
+        })
+      ) : (
+        <p style={{ fontWeight: "bold" }}>댓글없음...</p>
+      )}
       <input
+        value={comment}
         onChange={(e) => {
           setComment(e.target.value);
         }}
@@ -38,7 +44,11 @@ export default function Comment({ _id }) {
               comment: comment,
               _id: _id,
             }),
-          });
+          }).then((res) =>
+            res.json().then((result) => {
+              setData(result), setComment("");
+            })
+          );
         }}
       >
         댓글전송

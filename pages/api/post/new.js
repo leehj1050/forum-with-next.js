@@ -8,6 +8,7 @@ export default async function WritePostNew(req, res) {
 
   if (session) {
     req.body.author = session.user.email;
+    req.body.name = session.user.name;
   }
 
   // 1번째 파라미터 요청은 유저들의 요청

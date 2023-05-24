@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         let db = (await connectDB).db("forum");
         await db.collection("user_cred").insertOne(req.body);
 
-        res.status(200).json(req.body);
+        res.status(200).redirect(302, "/");
       }
     }
   }
