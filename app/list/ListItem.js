@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import Like from "./Like";
 
-export default function ListItem({ result }) {
+export default function ListItem({ result, session }) {
   // 삭제버튼 클릭시~!!!
   const handleDelClick = (e, selectId) => {
     if (confirm("삭제하시겠습니까?")) {
@@ -48,6 +49,7 @@ export default function ListItem({ result }) {
             </span>
             <p>작성자 ID : {result[idx].author}</p>
             <p>작성자 닉네임 : {result[idx].name}</p>
+            <Like post_id={result[idx]._id} session={session} />
           </div>
         );
       })}

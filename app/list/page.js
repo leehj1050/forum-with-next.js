@@ -1,5 +1,7 @@
 import { connectDB } from "@/util/database";
 import ListItem from "./ListItem";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 //npm run build했을때 다이나믹 렌더링을 보여줌
 export const dynamic = "force-dynamic";
@@ -14,9 +16,12 @@ export default async function List() {
   const db = (await connectDB).db("forum");
   const result = await db.collection("post").find().toArray();
 
+  //session
+  const session = await getServerSession(authOptions);
+
   return (
     <>
-      <ListItem result={result} />
+      <ListItem result={result} session={session} />
     </>
   );
 }
