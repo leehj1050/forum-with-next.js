@@ -5,10 +5,14 @@ import { getServerSession } from "next-auth";
 export default async function WritePostNew(req, res) {
   //현재 로그인한 유저정보를 db에서 출력
   let session = await getServerSession(req, res, authOptions);
+  req.body = JSON.parse(req.body);
 
   if (session) {
     req.body.author = session.user.email;
     req.body.name = session.user.name;
+    {
+      req.body.imageFile ? req.body.imageFile : null;
+    }
   }
 
   // 1번째 파라미터 요청은 유저들의 요청

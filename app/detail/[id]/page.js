@@ -10,10 +10,15 @@ export default async function Detail(props) {
     .findOne({ _id: new ObjectId(props.params.id) });
 
   return (
-    <div style={{ padding: "1em" }}>
+    <div style={{ padding: "1em", width: "50%" }}>
       <h4>상세페이지</h4>
       <h4>{result.title}</h4>
       <p>{result.content}</p>
+      {result.imageFile ? (
+        <img style={{ width: "100%" }} src={`${result.imageFile}`} />
+      ) : (
+        <></>
+      )}
       <Comment _id={result._id.toString()} />
     </div>
   );
