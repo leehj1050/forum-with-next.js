@@ -71,3 +71,10 @@ a {
   width: 1em;
   height: 1em;
 }
+
+.dark-mode .navbar {
+  background-color: #222;
+}
+.dark-mode .navbar a {
+  color: white;
+}

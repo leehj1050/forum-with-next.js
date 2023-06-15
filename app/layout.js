@@ -5,6 +5,8 @@ import LoginBtn from "./loginBtn";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import LogoutBtn from "./logoutBtn";
+import { cookies } from "next/headers";
+import DarkMode from "./DarkMode";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,14 @@ export default async function RootLayout({ children }) {
 
   // console.log(session);
 
+  let res = cookies().get("mode");
+  console.log(res);
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={res !== undefined && res.value === "dark" ? "dark-mode" : ""}
+      >
         <div className="navbar">
           <Link href="/" className="logo">
             App Forum
@@ -38,6 +45,7 @@ export default async function RootLayout({ children }) {
               <Link href="/register">회원가입</Link>
             </>
           )}
+          <DarkMode resMode={res} />
         </div>
         {children}
       </body>
