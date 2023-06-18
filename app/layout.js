@@ -21,7 +21,6 @@ export default async function RootLayout({ children }) {
   // console.log(session);
 
   let res = cookies().get("mode");
-  console.log(res);
 
   return (
     <html lang="en">
@@ -33,7 +32,8 @@ export default async function RootLayout({ children }) {
             App Forum
           </Link>
           <Link href="/list">List</Link>
-          {session ? <Link href="/write">Write</Link> : <></>}
+          {/* {session ? <Link href="/write">Write</Link> : <></>} */}
+          <Link href="/write">Write</Link>
           {session ? (
             <span>
               {session.user.name} <LogoutBtn />
