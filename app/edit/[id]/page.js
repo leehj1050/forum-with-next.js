@@ -13,7 +13,7 @@ export default async function Edit(props) {
 
   let session = await getServerSession(authOptions);
 
-  if (session.user.email === result.author) {
+  if (session && session.user.email === result.author) {
     return (
       <div className="p-20">
         <h4>글 수정페이지</h4>
